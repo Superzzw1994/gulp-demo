@@ -44,7 +44,7 @@ const injectHtml = () => {
 }
 const bs = browserSync.create()
 const serve = () => {
-    watch('./src/*.html', series(jsTask, injectHtml))
+    watch('./src/*.html', series(htmlTask, injectHtml))
     watch('./src/js/*.js', series(jsTask, injectHtml))
     watch('./src/css/*.scss', series(jsTask, scssTask, injectHtml))
 
