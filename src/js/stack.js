@@ -13,7 +13,7 @@ class Stack {
   }
 
   pop() {
-    this.items.pop()
+    return this.items.pop()
   }
 
   size() {
@@ -25,7 +25,7 @@ class Stack {
   }
 
   toString() {
-    return JSON.stringify(this.items)
+    return this.items.reduce((t, c) => t + c, '')
   }
 }
 
@@ -41,4 +41,17 @@ const stack = new Stack(items)
 // console.log(stack.isEmpty())
 // console.log(stack.size())
 //
-// console.log(stack.toString())
+//console.log(stack.toString(''))
+const dec2bin = (decNumber) => {
+  const bin = new Stack()
+  while (decNumber > 0) {
+    bin.push(decNumber % 2)
+    decNumber = Math.floor(decNumber / 2)
+  }
+  let binNumber = ''
+  while (!bin.isEmpty()) {
+    binNumber += bin.pop()
+  }
+  return parseInt(binNumber)
+}
+//console.log(dec2bin(100))
