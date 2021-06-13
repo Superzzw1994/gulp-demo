@@ -7,4 +7,13 @@ const key2Hash = (string = '', size) => {
     }
     return hashCode % size
 }
-console.log(key2Hash('zzw1994', 10))
+
+class HashMap {
+    constructor() {
+        this.storage = []
+        // 个数
+        this.count = 0
+        // 可存储最大个数
+        this.limit = 16
+    }
+}
