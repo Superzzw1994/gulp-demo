@@ -1,5 +1,7 @@
 const {dest, src, watch, series, parallel} = require('gulp')
 const minHtml = require('gulp-htmlmin')
+const ts = require('gulp-typescript')
+const tsProject = ts.createProject("tsconfig.json");
 const sass = require('gulp-sass');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
@@ -24,9 +26,10 @@ const scssTask = () => src('./src/**/*.scss', {
     .pipe(postcss())
     .pipe(dest('./dist'));
 const jsTask = () => {
-    return src('./src/**/*.js', {
+    return src('./src/**/*.ts', {
         base: './src'
     })
+        .pipe(tsProject())
         .pipe(babel())
         .pipe(sourcemaps.init())
         .pipe(terser({
@@ -45,7 +48,7 @@ const injectHtml = () => {
 const bs = browserSync.create()
 const serve = () => {
     watch('./src/*.html', series(htmlTask, injectHtml))
-    watch('./src/js/*.js', series(jsTask, injectHtml))
+    watch('./src/js/*.ts', series(jsTask, injectHtml))
     watch('./src/css/*.scss', series(jsTask, scssTask, injectHtml))
 
     bs.init({
