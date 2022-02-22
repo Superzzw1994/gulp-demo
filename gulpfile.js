@@ -2,7 +2,6 @@ const {dest, src, watch, series, parallel} = require('gulp')
 const minHtml = require('gulp-htmlmin')
 const ts = require('gulp-typescript')
 const tsProject = ts.createProject("tsconfig.json");
-const sass = require('gulp-sass');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const terser = require('gulp-terser');
@@ -19,11 +18,9 @@ const htmlTask = () => {
         }))
         .pipe(dest('./dist'))
 }
-const scssTask = () => src('./src/**/*.scss', {
+const scssTask = () => src('./src/**/*.css', {
     base: './src'
-})
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss())
+}).pipe(postcss())
     .pipe(dest('./dist'));
 const jsTask = () => {
     return src('./src/**/*.ts', {
