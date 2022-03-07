@@ -1,17 +1,15 @@
-function zDecorator(count ?: number) {
-    return function (targetClass: any) {
-        const l = new targetClass()
-        l.buy(count || 1994)
-    }
+/**
+ * @name: index
+ * @author: zhiwei.zheng
+ * @date: 2022-03-07 22:51
+ * @description：index
+ * @update: 2022-03-07 22:51
+ */
+import {debounce} from "./code/debouce";
+
+const target = document.getElementById('debounce');
+if (target) {
+    target.addEventListener('keyup', debounce(() => {
+        console.log(target)
+    }, 300))
 }
-
-@zDecorator(8000)
-class Zzw {
-    constructor() {
-    }
-
-    buy(count: number) {
-        console.log(count)
-    }
-}
-
